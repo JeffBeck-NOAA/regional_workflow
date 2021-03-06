@@ -1721,28 +1721,44 @@ fi
 #
 #-----------------------------------------------------------------------
 #
+# Make sure WRF_FILE_FMT_ICS is set to a valid value.
+#
+#-----------------------------------------------------------------------
+#
+if [ "${EXTRN_MDL_NAME_ICS}" = "HRRR" ] || \
+   [ "${EXTRN_MDL_NAME_ICS}" = "RAP" ]; then
+  err_msg="\
+The file format for FV3GFS external model files specified in 
+WRF_FILE_FMT_ICS is not supported:
+  WRF_FILE_FMT_ICS = \"${WRF_FILE_FMT_ICS}\""
+  check_var_valid_value \
+    "WRF_FILE_FMT_ICS" "valid_vals_WRF_FILE_FMT_ICS" "${err_msg}"
+fi
+#
+#-----------------------------------------------------------------------
+#
+# Make sure WRF_FILE_FMT_LBCS is set to a valid value.
+#
+#-----------------------------------------------------------------------
+#
+if [ "${EXTRN_MDL_NAME_ICS}" = "HRRR" ] || \
+   [ "${EXTRN_MDL_NAME_ICS}" = "RAP" ]; then
+  err_msg="\
+The file format for WRF-based external model files specified in 
+WRF_FILE_FMT_LBCS is not supported:
+  WRF_FILE_FMT_LBCS = \"${WRF_FILE_FMT_LBCS}\""
+  check_var_valid_value \
+    "WRF_FILE_FMT_LBCS" "valid_vals_WRF_FILE_FMT_LBCS" "${err_msg}"
+fi
+#
+#-----------------------------------------------------------------------
+#
 # Set cycle-independent parameters associated with the external models
 # from which we will obtain the ICs and LBCs.
 #
 #-----------------------------------------------------------------------
 #
 . ./set_extrn_mdl_params.sh
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
 #-----------------------------------------------------------------------
 #

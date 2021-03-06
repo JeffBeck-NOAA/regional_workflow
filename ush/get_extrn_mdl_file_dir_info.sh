@@ -316,8 +316,10 @@ fi
 #
   if [ "${anl_or_fcst}" = "ANL" ]; then
     fv3gfs_file_fmt="${FV3GFS_FILE_FMT_ICS}"
+    wrf_file_fmt="${WRF_FILE_FMT_ICS}"
   elif [ "${anl_or_fcst}" = "FCST" ]; then
     fv3gfs_file_fmt="${FV3GFS_FILE_FMT_LBCS}"
+    wrf_file_fmt="${WRF_FILE_FMT_LBCS}"
   fi
 
   case "${anl_or_fcst}" in
@@ -419,6 +421,14 @@ workflow to look for the external model files in a user-staged directory."
 
     "RAP")
 #
+# NetCDF RAP output is not available on HPSS, so exit.
+#
+      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      print_err_msg_exit "\
+RAP output in netCDF format is not available on HPSS.  Please use the staged 
+external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
+specify the location to WRF-based netCDF files."
+#
 # Note that this is GSL RAPX data, not operational NCEP RAP data.  An option for the latter
 # may be added in the future.
 #
@@ -431,6 +441,14 @@ workflow to look for the external model files in a user-staged directory."
       ;;
 
     "HRRR")
+#
+# NetCDF HRRR output is not available on HPSS, so exit.
+#
+      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      print_err_msg_exit "\
+HRRR output in netCDF format is not available on HPSS.  Please use the staged 
+external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
+specify the location to WRF-based netCDF files."
 #
 # Note that this is GSL HRRRX data, not operational NCEP HRRR data.  An option for the latter
 # may be added in the future.
@@ -546,6 +564,14 @@ workflow to look for the external model files in a user-staged directory."
 
     "RAP")
 #
+# NetCDF RAP output is not available on HPSS, so exit.
+#
+      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      print_err_msg_exit "\
+RAP output in netCDF format is not available on HPSS.  Please use the staged 
+external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
+specify the location to WRF-based netCDF files."
+#
 # Note that this is GSL RAPX data, not operational NCEP RAP data.  An option for the latter
 # may be added in the future.
 #
@@ -568,6 +594,14 @@ workflow to look for the external model files in a user-staged directory."
       ;;
 
     "HRRR")
+#
+# NetCDF HRRR output is not available on HPSS, so exit.
+#
+      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      print_err_msg_exit "\
+HRRR output in netCDF format is not available on HPSS.  Please use the staged 
+external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
+specify the location to WRF-based netCDF files."
 #
 # Note that this is GSL HRRRX data, not operational NCEP HRRR data.  An option for the latter
 # may be added in the future.

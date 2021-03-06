@@ -416,13 +416,27 @@ FCST_LEN_HRS="24"
 # EXTRN_MDL_NAME_LBCS is set to "FV3GFS"), this variable specifies the 
 # format of the model files to use when generating the LBCs.
 #
+# WRF_FILE_FMT_ICS:
+#
+# If using a WRF-based external model (e.g., RAP, HRRR, HRRRE, etc.) as the source 
+# of the ICs (i.e. if EXTRN_MDL_NAME_ICS is set to "HRRR" or "RAP"), this varible
+# specifies the format of the model files to use when generating the ICs.
+#
+# WRF_FILE_FMT_LBCS:
+#
+# If using a WRF-based external model (e.g., RAP, HRRR, HRRRE, etc.) as the source 
+# of the LBCs (i.e. if EXTRN_MDL_NAME_LBCS is set to "HRRR" or "RAP"), this varible
+# specifies the format of the model files to use when generating the LBCs.
+#
 #-----------------------------------------------------------------------
 #
 EXTRN_MDL_NAME_ICS="FV3GFS"
 EXTRN_MDL_NAME_LBCS="FV3GFS"
 LBC_SPEC_INTVL_HRS="6"
-FV3GFS_FILE_FMT_ICS="nemsio"
-FV3GFS_FILE_FMT_LBCS="nemsio"
+FV3GFS_FILE_FMT_ICS="grib2"
+FV3GFS_FILE_FMT_LBCS="grib2"
+WRF_FILE_FMT_ICS="grib2"
+WRF_FILE_FMT_LBCS="grib2"
 #
 #-----------------------------------------------------------------------
 #
