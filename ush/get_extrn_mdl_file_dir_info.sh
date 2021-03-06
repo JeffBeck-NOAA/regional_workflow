@@ -423,7 +423,8 @@ workflow to look for the external model files in a user-staged directory."
 #
 # NetCDF RAP output is not available on HPSS, so exit.
 #
-      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      if [ "${wrf_file_fmt}" = "netcdf" ] && \
+         [ "${USE_USER_STAGED_EXTRN_FILES}" = "FALSE" ]; then
       print_err_msg_exit "\
 RAP output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
@@ -444,7 +445,8 @@ specify the location to WRF-based netCDF files."
 #
 # NetCDF HRRR output is not available on HPSS, so exit.
 #
-      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      if [ "${wrf_file_fmt}" = "netcdf" ] && \
+         [ "${USE_USER_STAGED_EXTRN_FILES}" = "FALSE" ]; then
       print_err_msg_exit "\
 HRRR output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
@@ -566,7 +568,8 @@ workflow to look for the external model files in a user-staged directory."
 #
 # NetCDF RAP output is not available on HPSS, so exit.
 #
-      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      if [ "${wrf_file_fmt}" = "netcdf" ] && \
+         [ "${USE_USER_STAGED_EXTRN_FILES}" = "FALSE" ]; then
       print_err_msg_exit "\
 RAP output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
@@ -597,7 +600,8 @@ specify the location to WRF-based netCDF files."
 #
 # NetCDF HRRR output is not available on HPSS, so exit.
 #
-      if [ "${wrf_file_fmt}" = "netcdf" ]; then
+      if [ "${wrf_file_fmt}" = "netcdf" ] && \
+         [ "${USE_USER_STAGED_EXTRN_FILES}" = "FALSE" ]; then
       print_err_msg_exit "\
 HRRR output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
