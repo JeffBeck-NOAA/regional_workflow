@@ -429,6 +429,7 @@ workflow to look for the external model files in a user-staged directory."
 RAP output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
 specify the location to WRF-based netCDF files."
+      fi
 #
 # Note that this is GSL RAPX data, not operational NCEP RAP data.  An option for the latter
 # may be added in the future.
@@ -451,6 +452,7 @@ specify the location to WRF-based netCDF files."
 HRRR output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
 specify the location to WRF-based netCDF files."
+      fi
 #
 # Note that this is GSL HRRRX data, not operational NCEP HRRR data.  An option for the latter
 # may be added in the future.
@@ -574,6 +576,7 @@ workflow to look for the external model files in a user-staged directory."
 RAP output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
 specify the location to WRF-based netCDF files."
+      fi
 #
 # Note that this is GSL RAPX data, not operational NCEP RAP data.  An option for the latter
 # may be added in the future.
@@ -606,6 +609,7 @@ specify the location to WRF-based netCDF files."
 HRRR output in netCDF format is not available on HPSS.  Please use the staged 
 external data option (USE_USER_STAGED_EXTRN_FILES) in the config.sh script to
 specify the location to WRF-based netCDF files."
+      fi
 #
 # Note that this is GSL HRRRX data, not operational NCEP HRRR data.  An option for the latter
 # may be added in the future.
