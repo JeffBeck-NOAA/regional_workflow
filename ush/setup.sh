@@ -1591,8 +1591,7 @@ one above.  Reset values are:
 
   fi
 
-  if [ "${RUN_TASK_VX_GRIDSTAT}" = "TRUE" ] || \
-     [ "${RUN_TASK_VX_GRIDSTAT}" = "FALSE" ]; then
+  if [ "${RUN_TASK_VX_GRIDSTAT}" = "TRUE" ]; then
 
     msg="
 When RUN_ENVIR is set to \"nco\", it is assumed that the verification
@@ -1611,8 +1610,7 @@ Reset value is:"
 
   fi
 
-  if [ "${RUN_TASK_VX_POINTSTAT}" = "TRUE" ] || \
-     [ "${RUN_TASK_VX_POINTSTAT}" = "FALSE" ]; then
+  if [ "${RUN_TASK_VX_POINTSTAT}" = "TRUE" ]; then
 
     msg="
 When RUN_ENVIR is set to \"nco\", it is assumed that the verification
@@ -1631,8 +1629,7 @@ Reset value is:"
 
   fi
 
-  if [ "${RUN_TASK_VX_ENSGRID}" = "TRUE" ] || \
-     [ "${RUN_TASK_VX_ENSGRID}" = "FALSE" ]; then
+  if [ "${RUN_TASK_VX_ENSGRID}" = "TRUE" ]; then
 
     msg="
 When RUN_ENVIR is set to \"nco\", it is assumed that the verification
