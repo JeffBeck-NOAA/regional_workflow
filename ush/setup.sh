@@ -1397,8 +1397,8 @@ fi
 #
 #-----------------------------------------------------------------------
 #
-if [ "$DO_ENSEMBLE" = "FALSE" ] && ([ "$RUN_TASK_VX_ENSGRID" = "TRUE" ] || \
-   [ "$RUN_TASK_VX_ENSPOINT" = "TRUE" ]); then
+if [ "${DO_ENSEMBLE}" = "FALSE" ] && [ "${RUN_TASK_VX_ENSGRID}" = "TRUE" -o \
+   "${RUN_TASK_VX_ENSPOINT}" = "TRUE" ]; then
   print_err_msg_exit "\
 Ensemble verification can not be run unless running in ensemble mode:
    DO_ENSEMBLE = \"${DO_ENSEMBLE}\"
