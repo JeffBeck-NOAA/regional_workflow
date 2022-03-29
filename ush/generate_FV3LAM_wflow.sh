@@ -882,7 +882,7 @@ if [ "${DO_SHUM}" = "TRUE" ]; then
     'shum': ${SHUM_MAG},
     'shum_lscale': ${SHUM_LSCALE},
     'shum_tau': ${SHUM_TSCALE},
-    'shumint': ${SHUM_INT},
+    'shumint': ${SHUM_INT},"
 fi
 
 if [ "${DO_SKEB}" = "TRUE" ]; then
@@ -894,7 +894,7 @@ if [ "${DO_SKEB}" = "TRUE" ]; then
     'skebnorm': ${SKEBNORM},
     'skeb_tau': ${SKEB_TSCALE},
     'skebint': ${SKEB_INT},
-    'skeb_vdof': ${SKEB_VDOF},
+    'skeb_vdof': ${SKEB_VDOF},"
 fi
 
 if [ "${DO_SPP}" = "TRUE" ] || [ "${DO_LSM_SPP}" = "TRUE" ]; then
