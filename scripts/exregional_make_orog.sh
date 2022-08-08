@@ -12,14 +12,6 @@
 #
 #-----------------------------------------------------------------------
 #
-# Source other necessary files.
-#
-#-----------------------------------------------------------------------
-#
-. $USHDIR/link_fix.sh
-#
-#-----------------------------------------------------------------------
-#
 # Save current shell options (in a global array).  Then set new options
 # for this script/function.
 #
@@ -76,8 +68,7 @@ print_input_args valid_args
 #
 #-----------------------------------------------------------------------
 #
-# Set OpenMP variables.  The orog executable runs with OMP. On
-# WCOSS (Cray), it is optimized for six threads, which is the default.
+# Set OpenMP variables.  The orog executable runs with OMP.
 #
 #-----------------------------------------------------------------------
 #
@@ -373,7 +364,7 @@ if [ "${GRID_GEN_METHOD}" = "GFDLgrid" ]; then
 #
 # Really depends on what EMC wants to do.
 
-  res="${GFDLgrid_RES}"
+  res="${GFDLgrid_NUM_CELLS}"
 #  stretch_fac="${GFDLgrid_STRETCH_FAC}"
   refine_ratio="${GFDLgrid_REFINE_RATIO}"
 
@@ -581,9 +572,9 @@ cd_vrfy -
 #
 #-----------------------------------------------------------------------
 #
-link_fix \
-  verbose="$VERBOSE" \
-  file_group="orog" || \
+python3  $USHDIR/link_fix.py \
+  --path-to-defns ${GLOBAL_VAR_DEFNS_FP} \
+  --file-group "orog" || \
 print_err_msg_exit "\
 Call to function to create links to orography files failed."
 #

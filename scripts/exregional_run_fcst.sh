@@ -9,16 +9,6 @@
 #
 . ${GLOBAL_VAR_DEFNS_FP}
 . $USHDIR/source_util_funcs.sh
-. $USHDIR/set_FV3nml_ens_stoch_seeds.sh
-#
-#-----------------------------------------------------------------------
-#
-# Source other necessary files.
-#
-#-----------------------------------------------------------------------
-#
-. $USHDIR/create_model_configure_file.sh
-. $USHDIR/create_diag_table_file.sh
 #
 #-----------------------------------------------------------------------
 #
@@ -167,8 +157,8 @@ create_symlink_to_file target="$target" symlink="$symlink" \
 #target="${FIXLAM}/${CRES}${DOT_OR_USCORE}grid.tile${TILE_RGNL}.halo${NH3}.nc"
 #if [ "${RUN_TASK_MAKE_SFC_CLIMO}" = "TRUE" ] && \
 #   [ "${GRID_GEN_METHOD}" = "GFDLgrid" ] && \
-#   [ "${GFDLgrid_USE_GFDLgrid_RES_IN_FILENAMES}" = "FALSE" ]; then
-#  symlink="C${GFDLgrid_RES}${DOT_OR_USCORE}grid.tile${TILE_RGNL}.nc"
+#   [ "${GFDLgrid_USE_NUM_CELLS_IN_FILENAMES}" = "FALSE" ]; then
+#  symlink="C${GFDLgrid_NUM_CELLS}${DOT_OR_USCORE}grid.tile${TILE_RGNL}.nc"
 #else
 #  symlink="${CRES}${DOT_OR_USCORE}grid.tile${TILE_RGNL}.nc"
 #fi
@@ -446,7 +436,9 @@ fi
 
 if [ "${DO_ENSEMBLE}" = TRUE ] && ([ "${DO_SPP}" = TRUE ] || [ "${DO_SPPT}" = TRUE ] || [ "${DO_SHUM}" = TRUE ] \
    [ "${DO_SKEB}" = TRUE ] || [ "${DO_LSM_SPP}" =  TRUE ]); then
-  set_FV3nml_ens_stoch_seeds cdate="$cdate" || print_err_msg_exit "\
+  python3 $USHDIR/set_FV3nml_ens_stoch_seeds.py \
+      --path-to-defns ${GLOBAL_VAR_DEFNS_FP} \
+      --cdate "$cdate" || print_err_msg_exit "\
 Call to function to create the ensemble-based namelist for the current
 cycle's (cdate) run directory (run_dir) failed:
   cdate = \"${cdate}\"
@@ -464,12 +456,13 @@ fi
 #
 #-----------------------------------------------------------------------
 #
-create_model_configure_file \
-  cdate="$cdate" \
-  run_dir="${run_dir}" \
-  sub_hourly_post="${SUB_HOURLY_POST}" \
-  dt_subhourly_post_mnts="${DT_SUBHOURLY_POST_MNTS}" \
-  dt_atmos="${DT_ATMOS}" || print_err_msg_exit "\
+python3 $USHDIR/create_model_configure_file.py \
+  --path-to-defns ${GLOBAL_VAR_DEFNS_FP} \
+  --cdate "$cdate" \
+  --run-dir "${run_dir}" \
+  --sub-hourly-post "${SUB_HOURLY_POST}" \
+  --dt-subhourly-post-mnts "${DT_SUBHOURLY_POST_MNTS}" \
+  --dt-atmos "${DT_ATMOS}" || print_err_msg_exit "\
 Call to function to create a model configuration file for the current
 cycle's (cdate) run directory (run_dir) failed:
   cdate = \"${cdate}\"
@@ -482,8 +475,9 @@ cycle's (cdate) run directory (run_dir) failed:
 #
 #-----------------------------------------------------------------------
 #
-create_diag_table_file \
-  run_dir="${run_dir}" || print_err_msg_exit "\
+python3 $USHDIR/create_diag_table_file.py \
+  --path-to-defns ${GLOBAL_VAR_DEFNS_FP} \
+  --run-dir "${run_dir}" || print_err_msg_exit "\
 Call to function to create a diag table file for the current cycle's 
 (cdate) run directory (run_dir) failed:
   run_dir = \"${run_dir}\""
@@ -514,7 +508,6 @@ if [ ${WRITE_DOPOST} = "TRUE" ]; then
   yyyymmdd=${cdate:0:8}
   hh=${cdate:8:2}
   cyc=$hh
-  tmmark="tm00"
   fmn="00"
 
   if [ "${RUN_ENVIR}" = "nco" ]; then
@@ -539,7 +532,7 @@ if [ ${WRITE_DOPOST} = "TRUE" ]; then
     post_mn=${post_time:10:2}
     post_mn_or_null=""
     post_fn_suffix="GrbF${fhr_d}"
-    post_renamed_fn_suffix="f${fhr}${post_mn_or_null}.${tmmark}.grib2"
+    post_renamed_fn_suffix="f${fhr}${post_mn_or_null}.${POST_OUTPUT_DOMAIN_NAME}.grib2"
 
     basetime=$( $DATE_UTIL --date "$yyyymmdd $hh" +%y%j%H%M )
     symlink_suffix="_${basetime}f${fhr}${post_mn}"
@@ -547,7 +540,7 @@ if [ ${WRITE_DOPOST} = "TRUE" ]; then
     for fid in "${fids[@]}"; do
       FID=$(echo_uppercase $fid)
       post_orig_fn="${FID}.${post_fn_suffix}"
-      post_renamed_fn="${NET}.t${cyc}z.${fid}${post_renamed_fn_suffix}"
+      post_renamed_fn="${NET}.t${cyc}z.${fid}.${post_renamed_fn_suffix}"
       mv_vrfy ${run_dir}/${post_orig_fn} ${post_renamed_fn}
       ln_vrfy -fs ${post_renamed_fn} ${FID}${symlink_suffix}
     done
